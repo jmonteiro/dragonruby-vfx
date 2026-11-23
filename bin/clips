@@ -1,0 +1,23 @@
+#!/bin/sh
+# Films every demo playing by itself and turns each into docs/clips/<id>.webp,
+# an animated picture GitHub shows inline. Opens a window for a few minutes.
+#   bin/clips            every demo
+#   bin/clips weather    one demo
+# Needs ImageMagick (`magick`) and WebP's `img2webp`.
+cd "$(dirname "$0")/.." || exit 1
+rm -rf mygame/film
+if [ -n "$1" ]; then
+  ./dragonruby mygame --film 1 --demo "$1" --only 1 >/dev/null 2>&1
+else
+  ./dragonruby mygame --film 1 >/dev/null 2>&1
+fi
+[ -d mygame/film ] || { echo "The engine saved no frames."; exit 1; }
+mkdir -p docs/clips
+for frames in mygame/film/*/; do
+  id=$(basename "$frames")
+  magick mogrify -resize 640x "$frames"*.png
+  # Every other frame was kept, so each lasts 33 ms: 30 a second.
+  img2webp -loop 0 -lossy -q 70 -m 4 -d 33 "$frames"*.png -o "docs/clips/$id.webp" > /dev/null || exit 1
+done
+rm -rf mygame/film
+du -sh docs/clips

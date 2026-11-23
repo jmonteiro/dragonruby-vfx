@@ -1,0 +1,12 @@
+devid=jmonteiro
+devtitle=dragonruby-vfx contributors
+gameid=dragonruby-vfx
+gametitle=DragonRuby VFX Gallery
+version=0.1
+icon=metadata/icon.png
+orientation=landscape
+aspect_mode=0
+aspect_size=720
+scale_quality=2
+hd=false
+highdpi=false

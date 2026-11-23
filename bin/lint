@@ -1,0 +1,7 @@
+#!/bin/sh
+# Checks the Ruby against .rubocop.yml, which is fitted to the engine's mruby.
+#   bin/lint       report
+#   bin/lint -a    also apply the safe corrections; then run bin/test, since
+#                  only the engine can tell whether it still accepts the result
+cd "$(dirname "$0")/.." || exit 1
+exec rubocop "$@"

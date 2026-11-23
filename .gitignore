@@ -1,0 +1,33 @@
+# The DragonRuby engine is licensed and must not be redistributed. Unzip your
+# own copy over this repository so ./dragonruby sits beside mygame/.
+/*
+!/.gitignore
+!/README.md
+!/AGENTS.md
+!/CONTRIBUTING.md
+!/CHANGELOG.md
+!/.github/
+!/.rubocop.yml
+!/.ruby-version
+!/LICENSE
+!/CREDITS.md
+!/llms.txt
+!/bin/
+!/docs/
+!/experimental/
+/docs/*
+!/docs/effects/
+!/docs/shots/
+!/docs/clips/
+!/mygame/
+
+/mygame/logs/
+/mygame/tmp/
+/mygame/builds/
+/mygame/shots/
+/mygame/film/
+/mygame/errors/
+/mygame/open-source-licenses.txt
+/mygame/metadata/game_metadata.example-lowres.txt
+.DS_Store
+/mygame/metadata/cvars.txt

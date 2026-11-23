@@ -1,0 +1,9 @@
+#!/bin/sh
+# Builds the gallery for the browser into builds/dragonruby-vfx-html5-<version>/.
+# Serve that folder with any static web server, or publish it to GitHub Pages.
+cd "$(dirname "$0")/.." || exit 1
+rm -rf builds
+./dragonruby-publish --platforms=html5 --package mygame > builds.log 2>&1 || { tail -20 builds.log; exit 1; }
+tail -3 builds.log
+rm -f builds.log
+ls -d builds/*/

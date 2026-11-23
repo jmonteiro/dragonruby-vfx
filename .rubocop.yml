@@ -1,0 +1,87 @@
+# The code runs on mruby inside DragonRuby, not on the Ruby that runs RuboCop.
+# So RuboCop adapts to what the engine runs, never the other way round: a cop
+# that would rewrite code into something the engine lacks, or that behaves
+# differently there, is off, with the reason beside it.
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.1
+  Include:
+    - "mygame/lib/vfx/**/*.rb"
+    - "mygame/app/**/*.rb"
+    - "mygame/tests/**/*.rb"
+    - "bin/gen_sprites.rb"
+
+# The engine has no frozen-string pragma to honour.
+Style/FrozenStringLiteralComment:
+  Enabled: false
+# DragonRuby's require needs the ".rb".
+Style/RedundantFileExtensionInRequire:
+  Enabled: false
+# The engine's Integer#/ may answer with a Float, so idiv and fdiv are chosen
+# on purpose and must not be "simplified".
+Style/FloatDivision:
+  Enabled: false
+# Newer syntax and methods the engine's mruby does not have, or has not been
+# checked for: leave what is written alone.
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+Style/ArgumentsForwarding:
+  Enabled: false
+Style/NumberedParameters:
+  Enabled: false
+Style/ItBlockParameter:
+  Enabled: false
+Style/SafeNavigation:
+  Enabled: false
+Style/ComparableClamp:
+  Enabled: false
+Style/ComparableBetween:
+  Enabled: false
+Style/MinMaxComparison:
+  Enabled: false
+# The engine's parser rejects a do...end block inside "#{...}", so a block
+# keeps the braces it was written with.
+Style/BlockDelimiters:
+  Enabled: false
+
+# Taste, as the code is written.
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+# Each effect file opens with a header that documents it.
+Style/Documentation:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false
+Style/WordArray:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Naming/MethodParameterName:
+  Enabled: false
+# An effect's options are its keyword arguments, and a demo is one list of
+# steps; size is not the measure here.
+Metrics:
+  Enabled: false
+Layout/LineLength:
+  Max: 140
+  Exclude:
+    - "mygame/tests/**/*.rb"
+
+# Tests read as plain sentences (`assert.true! list.all? { ... }`) and check
+# the exact numbers the arithmetic gives.
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "mygame/tests/**/*.rb"
+Lint/AmbiguousOperatorPrecedence:
+  Exclude:
+    - "mygame/tests/**/*.rb"
+Lint/FloatComparison:
+  Exclude:
+    - "mygame/tests/**/*.rb"

@@ -1,0 +1,5 @@
+#!/bin/sh
+# Opens the gallery. Code reloads while it runs.
+# Extra arguments pass through, e.g. bin/run --demo hit_stop
+cd "$(dirname "$0")/.." || exit 1
+exec ./dragonruby mygame "$@"

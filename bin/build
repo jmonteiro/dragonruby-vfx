@@ -1,0 +1,13 @@
+#!/bin/sh
+# Packages the gallery for every platform into builds/, without uploading
+# anywhere. Keeps the archives and the unpacked web build:
+#   builds/dragonruby-vfx-html5-<version>/   static files for GitHub Pages
+#   builds/dragonruby-vfx-<platform>.zip     desktop builds
+# Names and version come from mygame/metadata/game_metadata.txt.
+cd "$(dirname "$0")/.." || exit 1
+rm -rf builds mygame/shots
+./dragonruby-publish --only-package mygame > builds.log 2>&1 || { tail -20 builds.log; exit 1; }
+grep -A6 'WARNING' builds.log
+rm -f builds.log
+find builds -mindepth 1 -maxdepth 1 ! -name '*.zip' ! -name '*-html5-*' -exec rm -rf {} +
+du -sh builds/*

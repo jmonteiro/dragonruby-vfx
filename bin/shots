@@ -1,0 +1,9 @@
+#!/bin/sh
+# Plays every demo on its own, saves one screenshot each, and copies them to
+# docs/shots/. Opens a window for a few seconds.
+cd "$(dirname "$0")/.." || exit 1
+rm -rf mygame/shots
+./dragonruby mygame --shots 1 >/dev/null 2>&1
+[ -d mygame/shots ] || { echo "The engine saved no screenshots."; exit 1; }
+mkdir -p docs/shots
+cp mygame/shots/*.png docs/shots/ && ls docs/shots

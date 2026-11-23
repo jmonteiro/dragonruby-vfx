@@ -1,0 +1,45 @@
+# dragonruby-vfx
+
+> Visual effects for the DragonRuby Game Toolkit (Ruby, mruby runtime). One file per effect in mygame/lib/vfx/, no dependencies between files, MIT licence.
+
+Conventions shared by every effect:
+- `Vfx::<Effect>.new(...)` returns a plain Hash of state. Keep it in `args.state`.
+- Trigger functions (`add`, `freeze`, `flash`, `squash`, ...) take that Hash first.
+- `Vfx::<Effect>.tick(state)` is called once per frame (60 per second). `Vfx::Shake`, `Vfx::Squash`, `Vfx::Particles`, `Vfx::DamageNumbers` and `Vfx::Weather` take a second argument, the time scale (0 holds them still); freeze the others by not calling `tick`.
+- Results are read from the Hash or from a helper (`apply`, `sprite`, `sprites`, `overlay`) that returns sprite Hashes for `args.outputs.primitives`.
+- Helpers named `draw(outputs, ...)` fill a render target and return the one sprite that shows it; pass `args.outputs`.
+- Stateless effects (`Vfx::RgbSplit`, `Vfx::Pixelate`, `Vfx::Film`, `Vfx::Lights`, `Vfx::Silhouette`, `Vfx::Lightning`, `Vfx::Parallax`, `Vfx::Slices`, `Vfx::Warp`, `Vfx::Shadows`) have no `new` and no `tick`.
+- A triangle is a sprite Hash with `x, y, x2, y2, x3, y3` in place of `w, h`, and `source_x, source_y, source_x2, ...` for the part of the picture it shows.
+- Blend modes on a sprite Hash: `blendmode: 1` normal, `2` additive, `8` multiply.
+- Sprites are Hashes with `x, y, w, h, path`; `x, y` is the bottom-left corner. `path: :solid` is a filled rectangle.
+- Code must run on mruby: no Regexp, and `Integer#/` may return a Float.
+
+## Effects
+
+- [Trauma screen shake](docs/effects/shake.md): `mygame/lib/vfx/shake.rb`, `Vfx::Shake`
+- [Hit stop](docs/effects/hit_stop.md): `mygame/lib/vfx/hit_stop.rb`, `Vfx::HitStop`
+- [Camera flash, fade, punch, kick](docs/effects/camera_fx.md): `mygame/lib/vfx/camera_fx.rb`, `Vfx::CameraFx`
+- [Squash and stretch](docs/effects/squash.md): `mygame/lib/vfx/squash.rb`, `Vfx::Squash`
+- [Particles](docs/effects/particles.md): `mygame/lib/vfx/particles.rb`, `Vfx::Particles`
+- [Afterimage trail](docs/effects/trail.md): `mygame/lib/vfx/trail.rb`, `Vfx::Trail`
+- [Scene transitions](docs/effects/transition.md): `mygame/lib/vfx/transition.rb`, `Vfx::Transition`
+- [Light map](docs/effects/lights.md): `mygame/lib/vfx/lights.rb`, `Vfx::Lights`
+- [Fog of war](docs/effects/fog.md): `mygame/lib/vfx/fog.rb`, `Vfx::Fog`
+- [RGB split](docs/effects/rgb_split.md): `mygame/lib/vfx/rgb_split.rb`, `Vfx::RgbSplit`
+- [Pixelate](docs/effects/pixelate.md): `mygame/lib/vfx/pixelate.rb`, `Vfx::Pixelate`
+- [Vignette and film grain](docs/effects/film.md): `mygame/lib/vfx/film.rb`, `Vfx::Film`
+- [Hit flash, outline, shadow](docs/effects/silhouette.md): `mygame/lib/vfx/silhouette.rb`, `Vfx::Silhouette`
+- [Damage numbers](docs/effects/damage_numbers.md): `mygame/lib/vfx/damage_numbers.rb`, `Vfx::DamageNumbers`
+- [Lightning](docs/effects/lightning.md): `mygame/lib/vfx/lightning.rb`, `Vfx::Lightning`
+- [Ribbon trail](docs/effects/ribbon.md): `mygame/lib/vfx/ribbon.rb`, `Vfx::Ribbon`
+- [Decals](docs/effects/decals.md): `mygame/lib/vfx/decals.rb`, `Vfx::Decals`
+- [Rain and snow](docs/effects/weather.md): `mygame/lib/vfx/weather.rb`, `Vfx::Weather`
+- [Parallax](docs/effects/parallax.md): `mygame/lib/vfx/parallax.rb`, `Vfx::Parallax`
+- [Row slices](docs/effects/slices.md): `mygame/lib/vfx/slices.rb`, `Vfx::Slices`
+- [Mesh warp](docs/effects/warp.md): `mygame/lib/vfx/warp.rb`, `Vfx::Warp`
+- [Shadow-casting light](docs/effects/shadows.md): `mygame/lib/vfx/shadows.rb`, `Vfx::Shadows`
+
+## Examples
+
+- [Demo per effect](mygame/app/demos/): the shortest complete use of each effect
+- [Tests](mygame/tests/all.rb): the exact numbers each function returns
