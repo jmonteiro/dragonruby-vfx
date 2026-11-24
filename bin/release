@@ -2,7 +2,7 @@
 # Releases a version:  bin/release 0.2.0
 #
 # Moves what is under "Unreleased" in CHANGELOG.md to the new version, sets the
-# version in the metadata and drenv.toml, commits, tags v<version>, pushes,
+# version in the metadata, drenv.toml and the README's install line, commits, tags v<version>, pushes,
 # creates the GitHub release with that part of the changelog as its notes, and
 # publishes the gallery built from that version (bin/pages).
 # It refuses to run unless the working tree is clean and lint and tests pass.
@@ -38,14 +38,15 @@ run "bin/test"
 heading = "## #{version} (#{Time.now.strftime("%Y-%m-%d")})\n"
 File.write("CHANGELOG.md", "#{before}## Unreleased\n\n#{heading}#{notes}#{older}")
 { "mygame/metadata/game_metadata.txt" => [/^version=.*$/, "version=#{version}"],
-  "drenv.toml" => [/^version = .*$/, "version = \"#{version}\""] }.each do |path, (was, now)|
+  "drenv.toml" => [/^version = .*$/, "version = \"#{version}\""],
+  "README.md" => [/dragonruby-vfx@v\d+\.\d+\.\d+/, "dragonruby-vfx@v#{version}"] }.each do |path, (was, now)|
   text = File.read(path)
-  stop "#{path} has no version line." unless text.match?(was)
-  File.write(path, text.sub(was, now))
+  stop "#{path} names no version." unless text.match?(was)
+  File.write(path, text.gsub(was, now))
 end
 
 File.write(".release-notes", notes.strip)
-run "git", "add", "CHANGELOG.md", "mygame/metadata/game_metadata.txt", "drenv.toml"
+run "git", "add", "CHANGELOG.md", "mygame/metadata/game_metadata.txt", "drenv.toml", "README.md"
 run "git", "-c", "commit.gpgsign=false", "commit", "-q", "-m", "Version #{version}"
 run "git", "tag", "v#{version}"
 run "git", "push", "-q", "origin", "main", "v#{version}"
