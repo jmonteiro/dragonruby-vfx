@@ -1,7 +1,9 @@
 #!/bin/sh
 # Builds the gallery for the browser and serves it at http://localhost:4000
 # (or the port given: bin/serve 8080). Ctrl-C stops it.
+# The server is Ruby's own, which needs the webrick gem: gem install webrick
 cd "$(dirname "$0")/.." || exit 1
+ruby -e 'require "webrick"' 2>/dev/null || { echo "Ruby's web server needs the webrick gem: gem install webrick"; exit 1; }
 bin/web || exit 1
 echo "Open http://localhost:${1:-4000}"
-exec python3 -m http.server "${1:-4000}" --bind 127.0.0.1 --directory "$(ls -d builds/*-html5-*/ | head -1)"
+exec ruby -run -e httpd -- "$(ls -d builds/*-html5-*/ | head -1)" -p "${1:-4000}" -b 127.0.0.1
