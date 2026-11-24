@@ -112,7 +112,7 @@ own copy of DragonRuby and copy this repository's files over it, so
     bin/web                  # build the gallery for the browser into builds/
     bin/serve                # build for the browser and serve it at http://localhost:4000
     bin/pages                # build for the browser and publish it to GitHub Pages
-    bin/release 0.2.0        # release a version: changelog, tag, GitHub release
+    bin/release 0.2.0        # release a version: changelog, tag, GitHub release, and the gallery
     bin/build                # package every platform into builds/
     ruby bin/gen_sprites.rb  # redraw the library's and the gallery's sprites, and the icon
 

@@ -2,8 +2,9 @@
 # Releases a version:  bin/release 0.2.0
 #
 # Moves what is under "Unreleased" in CHANGELOG.md to the new version, sets the
-# version in the metadata and drenv.toml, commits, tags v<version>, pushes, and
-# creates the GitHub release with that part of the changelog as its notes.
+# version in the metadata and drenv.toml, commits, tags v<version>, pushes,
+# creates the GitHub release with that part of the changelog as its notes, and
+# publishes the gallery built from that version (bin/pages).
 # It refuses to run unless the working tree is clean and lint and tests pass.
 #
 # Numbering, while the names are still settling: 0.x.0 for a new effect or a
@@ -50,4 +51,5 @@ run "git", "tag", "v#{version}"
 run "git", "push", "-q", "origin", "main", "v#{version}"
 run "gh", "release", "create", "v#{version}", "--title", version, "--notes-file", ".release-notes"
 File.delete(".release-notes")
-puts "Released #{version}. Run bin/pages to publish the gallery that goes with it."
+run "bin/pages"
+puts "Released #{version}, and published the gallery that goes with it."

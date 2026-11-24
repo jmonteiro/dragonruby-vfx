@@ -34,8 +34,10 @@ that demonstrates it.
 
 Any change a user of the library would notice (a new effect, a renamed or
 removed option, a fix) adds a line under "Unreleased" in `CHANGELOG.md`, in the
-same commit. `bin/release <version>` turns that section into a version, tags it
-and creates the GitHub release; its header explains the numbering.
+same commit. `bin/release <version>` turns that section into a version, tags
+it, creates the GitHub release and publishes the gallery built from it; its
+header explains the numbering. The gallery is built on your machine, not in
+GitHub Actions, because only the engine's executable is available there.
 
 ## Adding an effect
 
