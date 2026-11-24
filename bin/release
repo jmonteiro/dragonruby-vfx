@@ -16,7 +16,7 @@ def stop(why)
 end
 
 def run(*command)
-  system(*command) || stop("Failed: #{command.join(' ')}")
+  system(*command) || stop("Failed: #{command.join(" ")}")
 end
 
 version = ARGV.first.to_s
@@ -34,7 +34,7 @@ stop "Nothing is listed under Unreleased." if notes.strip.empty?
 run "bin/lint"
 run "bin/test"
 
-heading = "## #{version} (#{Time.now.strftime('%Y-%m-%d')})\n"
+heading = "## #{version} (#{Time.now.strftime("%Y-%m-%d")})\n"
 File.write("CHANGELOG.md", "#{before}## Unreleased\n\n#{heading}#{notes}#{older}")
 { "mygame/metadata/game_metadata.txt" => [/^version=.*$/, "version=#{version}"],
   "drenv.toml" => [/^version = .*$/, "version = \"#{version}\""] }.each do |path, (was, now)|
