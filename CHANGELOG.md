@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.1.1 (2026-11-23)
+
 - The clips in the docs no longer smear: they were encoded in a way that let
   errors pile up behind anything that moved.
 - A release now publishes the gallery too.
