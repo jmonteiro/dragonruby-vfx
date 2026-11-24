@@ -4,7 +4,7 @@ Visual effects for the [DragonRuby Game Toolkit](https://dragonruby.org),
 ported from techniques that are standard in other engines. Each effect is one
 Ruby file with no dependencies: copy it into your game and require it.
 
-**[Try the gallery in your browser](https://jmonteiro.github.io/dragonruby-vfx/)**: every effect, playing, with nothing to install.
+**[Try the gallery in your browser](https://www.jmonteiro.com/dragonruby-vfx/)**: every effect, playing, with nothing to install.
 
 Not affiliated with DragonRuby LLC. MIT licence; the sprites are CC0.
 
