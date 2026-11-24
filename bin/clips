@@ -17,7 +17,10 @@ for frames in mygame/film/*/; do
   id=$(basename "$frames")
   magick mogrify -resize 640x "$frames"*.png
   # Every other frame was kept, so each lasts 33 ms: 30 a second.
-  img2webp -loop 0 -lossy -q 70 -m 4 -d 33 "$frames"*.png -o "docs/clips/$id.webp" > /dev/null || exit 1
+  # A full picture at least every 8 frames (-kmax): between full pictures only
+  # the changes are stored, lossily, and without this their errors pile up as
+  # smears and ghosts behind anything that moves.
+  img2webp -loop 0 -kmin 3 -kmax 8 -lossy -q 80 -m 4 -d 33 "$frames"*.png -o "docs/clips/$id.webp" > /dev/null || exit 1
 done
 rm -rf mygame/film
 du -sh docs/clips
