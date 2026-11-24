@@ -27,8 +27,10 @@ that demonstrates it.
 - Sprites are drawn by code, in `bin/gen_sprites.rb`. An effect's pictures go
   in `mygame/lib/vfx/sprites/` and are found through the file's own `SPRITES`
   constant, never by a fixed path, so the folder works wherever it is copied.
-- No shaders in the library. DragonRuby's shaders are Pro-only, experimental,
-  and behaved unreliably when tried; see `experimental/shaders/README.md`.
+- No shaders in the library. DragonRuby's shaders are Pro-only and
+  experimental, do not run in web builds, and behaved unreliably when four
+  effects were written with them (those are in the history, at tag `v0.1.1`,
+  under `experimental/shaders/`).
 
 ## Changes and releases
 

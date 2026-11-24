@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Removed `experimental/shaders/`, the four shader effects that were never
+  part of the library. They remain in the history at tag `v0.1.1`.
+
 ## 0.1.1 (2026-11-23)
 
 - The clips in the docs no longer smear: they were encoded in a way that let

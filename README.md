@@ -178,7 +178,5 @@ from.
 - `docs/effects/`: one page per effect, with a clip from `docs/clips/`.
   `llms.txt` is a plain-text index of them.
 - `drenv.toml`: makes the library installable with drenv.
-- `experimental/shaders/`: four fragment-shader effects that are not part of
-  the library; its README says why.
 - `CONTRIBUTING.md`, `CHANGELOG.md`, `CREDITS.md`: the rules, what changed, and
   where each technique comes from.
