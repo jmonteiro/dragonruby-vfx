@@ -30,6 +30,13 @@ that demonstrates it.
 - No shaders in the library. DragonRuby's shaders are Pro-only, experimental,
   and behaved unreliably when tried; see `experimental/shaders/README.md`.
 
+## Changes and releases
+
+Any change a user of the library would notice (a new effect, a renamed or
+removed option, a fix) adds a line under "Unreleased" in `CHANGELOG.md`, in the
+same commit. `bin/release <version>` turns that section into a version, tags it
+and creates the GitHub release; its header explains the numbering.
+
 ## Adding an effect
 
 1. `mygame/lib/vfx/<id>.rb` with a header comment: what it is, a usage block, the source.
@@ -50,7 +57,7 @@ from the engine's samples.
 
 `bin/run`, `bin/test`, `bin/lint`, `bin/shots`, `bin/clips`,
 `bin/web` (browser build only), `bin/serve`, `bin/pages` (publishes the
-gallery) and `bin/build` (every platform);
+gallery), `bin/release` and `bin/build` (every platform);
 see `README.md`.
 
 GitHub Actions runs the lint and the tests on every push. The tests there use

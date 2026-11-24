@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+# Releases a version:  bin/release 0.2.0
+#
+# Moves what is under "Unreleased" in CHANGELOG.md to the new version, sets the
+# version in the metadata and drenv.toml, commits, tags v<version>, pushes, and
+# creates the GitHub release with that part of the changelog as its notes.
+# It refuses to run unless the working tree is clean and lint and tests pass.
+#
+# Numbering, while the names are still settling: 0.x.0 for a new effect or a
+# renamed or removed option, 0.x.y for a fix that changes no names.
+Dir.chdir(File.join(__dir__, ".."))
+
+def stop(why)
+  warn why
+  exit 1
+end
+
+def run(*command)
+  system(*command) || stop("Failed: #{command.join(' ')}")
+end
+
+version = ARGV.first.to_s
+stop "Usage: bin/release 0.2.0" unless version.match?(/\A\d+\.\d+\.\d+\z/)
+stop "Commit or stash your changes first." unless `git status --porcelain`.empty?
+stop "Releases are cut from main." unless `git branch --show-current`.strip == "main"
+stop "v#{version} already exists." unless `git tag --list v#{version}`.empty?
+
+changelog = File.read("CHANGELOG.md")
+before, unreleased = changelog.split("## Unreleased\n", 2)
+stop "CHANGELOG.md has no \"## Unreleased\" heading." unless unreleased
+notes, older = unreleased.split(/^(?=## )/, 2)
+stop "Nothing is listed under Unreleased." if notes.strip.empty?
+
+run "bin/lint"
+run "bin/test"
+
+heading = "## #{version} (#{Time.now.strftime('%Y-%m-%d')})\n"
+File.write("CHANGELOG.md", "#{before}## Unreleased\n\n#{heading}#{notes}#{older}")
+{ "mygame/metadata/game_metadata.txt" => [/^version=.*$/, "version=#{version}"],
+  "drenv.toml" => [/^version = .*$/, "version = \"#{version}\""] }.each do |path, (was, now)|
+  text = File.read(path)
+  stop "#{path} has no version line." unless text.match?(was)
+  File.write(path, text.sub(was, now))
+end
+
+File.write(".release-notes", notes.strip)
+run "git", "add", "CHANGELOG.md", "mygame/metadata/game_metadata.txt", "drenv.toml"
+run "git", "-c", "commit.gpgsign=false", "commit", "-q", "-m", "Version #{version}"
+run "git", "tag", "v#{version}"
+run "git", "push", "-q", "origin", "main", "v#{version}"
+run "gh", "release", "create", "v#{version}", "--title", version, "--notes-file", ".release-notes"
+File.delete(".release-notes")
+puts "Released #{version}. Run bin/pages to publish the gallery that goes with it."

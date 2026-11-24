@@ -11,6 +11,7 @@ AllCops:
     - "mygame/app/**/*.rb"
     - "mygame/tests/**/*.rb"
     - "bin/gen_sprites.rb"
+    - "bin/release"
 
 # The engine has no frozen-string pragma to honour.
 Style/FrozenStringLiteralComment:

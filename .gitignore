@@ -32,3 +32,4 @@
 /mygame/metadata/game_metadata.example-lowres.txt
 .DS_Store
 /mygame/metadata/cvars.txt
+/.release-notes

@@ -2,5 +2,6 @@
 # (https://github.com/Nitemaeric/drenv): `drenv add github:jmonteiro/dragonruby-vfx -n vfx`.
 [package]
 name = "vfx"
+version = "0.0.0"
 root = "mygame/lib"     # only the library, with its pictures, is vendored
 entrypoint = "vfx.rb"   # requires every effect

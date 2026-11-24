@@ -67,10 +67,11 @@ Each picture opens that effect's page, which shows it moving.
 [drenv](https://github.com/Nitemaeric/drenv) can vendor the whole library into
 your game and keep it pinned:
 
-    drenv add github:jmonteiro/dragonruby-vfx -n vfx
+    drenv add github:jmonteiro/dragonruby-vfx@v0.1.0 -n vfx
 
 That puts the effects and their pictures in `mygame/vendor/vfx/` and requires
-them all through `app/drenv_bundle.rb`.
+them all through `app/drenv_bundle.rb`. Leave out `@v0.1.0` to follow `main`;
+[the releases](https://github.com/jmonteiro/dragonruby-vfx/releases) list the versions.
 
 ### How an effect is used
 
@@ -111,6 +112,7 @@ own copy of DragonRuby and copy this repository's files over it, so
     bin/web                  # build the gallery for the browser into builds/
     bin/serve                # build for the browser and serve it at http://localhost:4000
     bin/pages                # build for the browser and publish it to GitHub Pages
+    bin/release 0.2.0        # release a version: changelog, tag, GitHub release
     bin/build                # package every platform into builds/
     ruby bin/gen_sprites.rb  # redraw the library's and the gallery's sprites, and the icon
 
