@@ -6,7 +6,23 @@ Ruby file with no dependencies: copy it into your game and require it.
 
 **[Try the gallery in your browser](https://www.jmonteiro.com/dragonruby-vfx/)**: every effect, playing, with nothing to install.
 
+![Trauma screen shake](docs/clips/shake.webp)
+
 Not affiliated with DragonRuby LLC. MIT licence; the sprites are CC0.
+
+## Gallery
+
+Each picture opens that effect's page, which shows it moving and documents it.
+
+| | | | |
+|---|---|---|---|
+| [![shake](docs/shots/shake.png)](docs/effects/shake.md) | [![hit_stop](docs/shots/hit_stop.png)](docs/effects/hit_stop.md) | [![camera_fx](docs/shots/camera_fx.png)](docs/effects/camera_fx.md) | [![squash](docs/shots/squash.png)](docs/effects/squash.md) |
+| [![particles](docs/shots/particles.png)](docs/effects/particles.md) | [![trail](docs/shots/trail.png)](docs/effects/trail.md) | [![transition](docs/shots/transition.png)](docs/effects/transition.md) | [![lights](docs/shots/lights.png)](docs/effects/lights.md) |
+| [![fog](docs/shots/fog.png)](docs/effects/fog.md) | [![rgb_split](docs/shots/rgb_split.png)](docs/effects/rgb_split.md) | [![pixelate](docs/shots/pixelate.png)](docs/effects/pixelate.md) | [![film](docs/shots/film.png)](docs/effects/film.md) |
+| [![silhouette](docs/shots/silhouette.png)](docs/effects/silhouette.md) | [![damage_numbers](docs/shots/damage_numbers.png)](docs/effects/damage_numbers.md) | [![lightning](docs/shots/lightning.png)](docs/effects/lightning.md) | [![ribbon](docs/shots/ribbon.png)](docs/effects/ribbon.md) |
+| [![decals](docs/shots/decals.png)](docs/effects/decals.md) | [![weather](docs/shots/weather.png)](docs/effects/weather.md) | [![parallax](docs/shots/parallax.png)](docs/effects/parallax.md) | [![slices](docs/shots/slices.png)](docs/effects/slices.md) |
+| [![warp](docs/shots/warp.png)](docs/effects/warp.md) | [![shadows](docs/shots/shadows.png)](docs/effects/shadows.md) | | |
+
 
 ## Effects
 
@@ -29,73 +45,76 @@ Not affiliated with DragonRuby LLC. MIT licence; the sprites are CC0.
 | Lightning | `lib/vfx/lightning.rb` | Jagged bolts with branches, by midpoint displacement | [lightning](docs/effects/lightning.md) |
 | Ribbon trail | `lib/vfx/ribbon.rb` | A tapering band of triangles behind a moving point | [ribbon](docs/effects/ribbon.md) |
 | Decals | `lib/vfx/decals.rb` | Marks that stay, drawn once into a layer that is never cleared | [decals](docs/effects/decals.md) |
-| Rain and snow | `lib/vfx/weather.rb` | Drops at several depths that wrap around the screen | [weather](docs/effects/weather.md) |
+| Rain and snow | `lib/vfx/weather.rb` | Drops at several depths; rain leans as it falls and splashes on the ground | [weather](docs/effects/weather.md) |
 | Parallax | `lib/vfx/parallax.rb` | Background layers that scroll by depth | [parallax](docs/effects/parallax.md) |
 | Row slices | `lib/vfx/slices.rb` | Reflection, heat haze and glitch from horizontal strips | [slices](docs/effects/slices.md) |
 | Mesh warp | `lib/vfx/warp.rb` | Shockwave and lens by moving the corners of a triangle grid | [warp](docs/effects/warp.md) |
 | Shadow-casting light | `lib/vfx/shadows.rb` | Lights that walls block, and line of sight | [shadows](docs/effects/shadows.md) |
 
-All twenty-two work on every DragonRuby licence tier and in web builds. None
-uses a shader. Some draw a picture from the `sprites/` folder beside them; each file's header
-says which.
-
-## Gallery
-
-![Trauma screen shake](docs/clips/shake.webp)
-
-Each picture opens that effect's page, which shows it moving.
-
-| | | | |
-|---|---|---|---|
-| [![shake](docs/shots/shake.png)](docs/effects/shake.md) | [![hit_stop](docs/shots/hit_stop.png)](docs/effects/hit_stop.md) | [![camera_fx](docs/shots/camera_fx.png)](docs/effects/camera_fx.md) | [![squash](docs/shots/squash.png)](docs/effects/squash.md) |
-| [![particles](docs/shots/particles.png)](docs/effects/particles.md) | [![trail](docs/shots/trail.png)](docs/effects/trail.md) | [![transition](docs/shots/transition.png)](docs/effects/transition.md) | [![lights](docs/shots/lights.png)](docs/effects/lights.md) |
-| [![fog](docs/shots/fog.png)](docs/effects/fog.md) | [![rgb_split](docs/shots/rgb_split.png)](docs/effects/rgb_split.md) | [![pixelate](docs/shots/pixelate.png)](docs/effects/pixelate.md) | [![film](docs/shots/film.png)](docs/effects/film.md) |
-| [![silhouette](docs/shots/silhouette.png)](docs/effects/silhouette.md) | [![damage_numbers](docs/shots/damage_numbers.png)](docs/effects/damage_numbers.md) | [![lightning](docs/shots/lightning.png)](docs/effects/lightning.md) | [![ribbon](docs/shots/ribbon.png)](docs/effects/ribbon.md) |
-| [![decals](docs/shots/decals.png)](docs/effects/decals.md) | [![weather](docs/shots/weather.png)](docs/effects/weather.md) | [![parallax](docs/shots/parallax.png)](docs/effects/parallax.md) | [![slices](docs/shots/slices.png)](docs/effects/slices.md) |
-| [![warp](docs/shots/warp.png)](docs/effects/warp.md) | [![shadows](docs/shots/shadows.png)](docs/effects/shadows.md) | | |
+All twenty-two work on every DragonRuby licence tier and in web builds; none
+uses a shader. Paths are relative to `mygame/`. Some effects draw a picture
+from the `sprites/` folder beside them; each file's header says which.
 
 ## Use an effect
 
-1. Copy the file from `mygame/lib/vfx/` into your game, e.g. `mygame/lib/vfx/shake.rb`.
-   If its header names a picture, copy that into a `sprites/` folder beside it.
-   Or copy the whole `lib/vfx/` folder and take what you need.
-2. `require "lib/vfx/shake.rb"` in your `main.rb`.
-3. Follow the usage block at the top of the file.
+**One effect.** Copy its file from `mygame/lib/vfx/` to the same place in your
+game and require it:
 
-### With drenv
+```ruby
+require "lib/vfx/shake.rb"
+```
 
-[drenv](https://github.com/Nitemaeric/drenv) can vendor the whole library into
-your game and keep it pinned:
+If the file's header names a picture, copy that too, into a `sprites/` folder
+beside the file. Then follow the usage block at the top of the file, or the
+effect's page under `docs/effects/`.
+
+**All of them.** Copy the whole `mygame/lib/vfx/` folder and `mygame/lib/vfx.rb`,
+and require the one file:
+
+```ruby
+require "lib/vfx.rb"
+```
+
+**With drenv.** [drenv](https://github.com/Nitemaeric/drenv) can vendor the
+library into your game and keep it pinned to a version:
 
     drenv add github:jmonteiro/dragonruby-vfx@v0.1.1 -n vfx
 
 That puts the effects and their pictures in `mygame/vendor/vfx/` and requires
-them all through `app/drenv_bundle.rb`. Leave out `@v0.1.1` to follow `main`;
-[the releases](https://github.com/jmonteiro/dragonruby-vfx/releases) list the versions.
+them all through `app/drenv_bundle.rb`. Leave out the `@v…` part to follow
+`main`. This route is new and has not been tried end to end yet; please open
+an issue if it misbehaves.
 
 ### How an effect is used
 
 Effects that keep state follow the same shape:
 
 ```ruby
-args.state.shake ||= Vfx::Shake.new        # a plain Hash holding the state
-Vfx::Shake.add(args.state.shake, 0.4)      # trigger it
-Vfx::Shake.tick(args.state.shake)          # once a frame
+args.state.shake ||= Vfx::Shake.new                  # a plain Hash holding the state
+Vfx::Shake.add(args.state.shake, 0.4)                # trigger it
+Vfx::Shake.tick(args.state.shake)                    # once a frame
 sprite = Vfx::Shake.apply(args.state.shake, sprite)  # use the result
 ```
 
 State is a Hash, so it can live in `args.state` and survives saving and hot
 reload. The functions are module methods and keep nothing between calls.
-Effects that only rearrange a finished picture (RGB split, pixelate, vignette,
-light map) have no state at all: one call returns the sprites to draw.
+Effects that only rearrange or decorate a finished picture (RGB split,
+pixelate, vignette, light map, row slices, mesh warp and others) have no state
+at all: one call returns the sprites to draw.
 
 During a hit stop or a pause, shake, squash, particles, damage numbers and
-weather take a time scale
-(`tick(state, 0)` holds them still). The others advance whenever `tick` is
-called: skip the call to freeze them, or keep calling it so that a fade or a
-transition runs on while the game is paused.
+weather take a time scale (`tick(state, 0)` holds them still). The others
+advance whenever `tick` is called: skip the call to freeze them, or keep
+calling it so that a fade or a transition runs on while the game is paused.
 
-## Run the gallery
+## Versions
+
+[The releases](https://github.com/jmonteiro/dragonruby-vfx/releases) list the
+versions, and `CHANGELOG.md` says what changed in each. While the version
+starts with 0, a release may rename an option; the changelog says so when it
+does.
+
+## Run the gallery yourself
 
 The gallery is a DragonRuby game that shows every effect with a description
 and controls. The engine is licensed and is not in this repository: unzip your
@@ -104,17 +123,22 @@ own copy of DragonRuby and copy this repository's files over it, so
 
     bin/run                  # open the gallery
     bin/run --demo hit_stop  # open it on one effect
+    bin/serve                # build it for the browser and serve it at http://localhost:4000 (needs Ruby's webrick gem)
+
+## Work on the library
+
+`CONTRIBUTING.md` has the rules and how to add an effect. The commands:
+
     bin/test                 # the tests, inside the engine, without a window
     bin/lint                 # RuboCop, fitted to the engine's Ruby; bin/lint -a autoformats
     bin/shots                # save one screenshot per effect to docs/shots/
     bin/clips                # film every effect into docs/clips/ (needs ImageMagick and img2webp)
     bin/clips weather        # film one effect
+    ruby bin/gen_sprites.rb  # redraw the library's and the gallery's sprites, and the icon
     bin/web                  # build the gallery for the browser into builds/
-    bin/serve                # build for the browser and serve it at http://localhost:4000
+    bin/build                # package the gallery for every platform into builds/
     bin/pages                # build for the browser and publish it to GitHub Pages
     bin/release 0.2.0        # release a version: changelog, tag, GitHub release, and the gallery
-    bin/build                # package every platform into builds/
-    ruby bin/gen_sprites.rb  # redraw the library's and the gallery's sprites, and the icon
 
 ## Related work
 
@@ -144,13 +168,17 @@ from.
 
 ## Layout
 
-- `mygame/lib/vfx/`: the library. One effect per file, each standing alone. `mygame/lib/vfx.rb` requires them all.
-- `drenv.toml`: makes the library installable with drenv.
-- `mygame/lib/vfx/sprites/`: the white shapes some effects draw. They find them beside themselves, wherever the folder is put.
-- `mygame/sprites/demo/`: pictures the gallery alone uses.
+- `mygame/lib/vfx/`: the library. One effect per file, each standing alone.
+- `mygame/lib/vfx.rb`: requires every effect.
+- `mygame/lib/vfx/sprites/`: the white shapes some effects draw. Each effect
+  finds them beside itself, wherever the folder is put.
 - `mygame/app/`: the gallery. `demos/` has one short demo per effect.
-- `mygame/tests/all.rb`: tests of the effects' arithmetic.
-- `docs/effects/`: one page per effect; `llms.txt` is a plain-text index of them.
-- `experimental/shaders/`: four fragment-shader effects that are not part of the library; its README says why.
-- `CONTRIBUTING.md`: the rules and how to add an effect. `CHANGELOG.md`: what changed.
-- `CREDITS.md`: where each technique comes from.
+- `mygame/sprites/demo/`: pictures the gallery alone uses.
+- `mygame/tests/`: tests of the effects' arithmetic.
+- `docs/effects/`: one page per effect, with a clip from `docs/clips/`.
+  `llms.txt` is a plain-text index of them.
+- `drenv.toml`: makes the library installable with drenv.
+- `experimental/shaders/`: four fragment-shader effects that are not part of
+  the library; its README says why.
+- `CONTRIBUTING.md`, `CHANGELOG.md`, `CREDITS.md`: the rules, what changed, and
+  where each technique comes from.
