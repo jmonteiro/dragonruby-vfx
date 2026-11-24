@@ -15,10 +15,13 @@
 #
 # References: HaxeFlixel's FlxEmitter and LittleJS's ParticleEmitter (both MIT)
 # for the set of options; written from scratch for DragonRuby.
-# This file stands alone: copy it and require it. It draws sprites/vfx/circle.png
-# unless you pass another `path:`.
+# This file stands alone: copy it, and sprites/circle.png beside it, and
+# require it. Pass another `path:` and it needs no picture of its own.
 module Vfx
   module Particles
+    # The pictures sit in a `sprites` folder beside this file, wherever that is.
+    SPRITES = "#{__FILE__[0, __FILE__.rindex("/")]}/sprites".freeze
+
     # max: the most particles alive at once; beyond it the oldest are dropped.
     def self.new(max: 1000)
       { particles: [], max: [max, 0].max }
@@ -32,7 +35,7 @@ module Vfx
     # spin: degrees per frame. blendmode: 1 normal, 2 additive (fire, sparks, magic).
     def self.emit(emitter, x:, y:, count: 1, angle: 90, spread: 360, speed: 3, life: 40, size: 10, size_end: 0,
                   color: [255, 255, 255], color_end: nil, alpha: 255, gravity: 0, drag: 1.0, spin: 0,
-                  path: "sprites/vfx/circle.png", blendmode: 1)
+                  path: "#{SPRITES}/circle.png", blendmode: 1)
       particles = emitter[:particles]
       count.times do
         direction = (angle + ((rand - 0.5) * spread)) * Math::PI / 180

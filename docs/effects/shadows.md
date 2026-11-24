@@ -3,7 +3,7 @@
 ![Shadow-casting light](../clips/shadows.webp)
 
 - **File:** `mygame/lib/vfx/shadows.rb` (`Vfx::Shadows`)
-- **Needs:** `sprites/vfx/light.png`. Any licence tier, web builds included.
+- **Needs:** `sprites/light.png` beside the file. Any licence tier, web builds included.
 - **Cost:** per light, three rays for every wall end, each tested against every wall, in Ruby. 20 walls is about 3,000 tests a frame. One render target per light.
 
 ## What it is

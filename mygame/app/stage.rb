@@ -68,7 +68,7 @@ module Stage
   end
 
   def self.circle(x, y, radius, color, alpha = 255)
-    { x: x - radius, y: y - radius, w: radius * 2, h: radius * 2, path: "sprites/vfx/circle.png",
+    { x: x - radius, y: y - radius, w: radius * 2, h: radius * 2, path: "lib/vfx/sprites/circle.png",
       r: color[0], g: color[1], b: color[2], a: alpha }
   end
 

@@ -32,7 +32,7 @@ DragonRuby's bundled samples (MIT, DragonRuby LLP) taught the engine's side of
 several effects: drawing a scene to a render target and moving it, blend modes
 for lighting, the render target that is not cleared, and textured triangles.
 
-The sprites in `mygame/sprites/vfx/` and the icon are drawn by
+The sprites in `mygame/lib/vfx/sprites/` and `mygame/sprites/demo/`, and the icon, are drawn by
 `bin/gen_sprites.rb` and are released under CC0.
 
 The gallery is built with the DragonRuby Game Toolkit, which is commercial

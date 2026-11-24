@@ -13,9 +13,13 @@
 #
 # References: HaxeFlixel's flixel-addons transitions and Nez's Graphics/Transitions
 # (both MIT) for the set of shapes; written from scratch.
-# This file stands alone: copy it and require it. The iris draws sprites/vfx/hole.png.
+# This file stands alone: copy it and require it. The iris also needs
+# sprites/hole.png beside it.
 module Vfx
   module Transition
+    # The pictures sit in a `sprites` folder beside this file, wherever that is.
+    SPRITES = "#{__FILE__[0, __FILE__.rindex("/")]}/sprites".freeze
+
     KINDS = [:fade, :wipe, :iris, :tiles, :blinds].freeze
     TILE = 80   # the side of a tile, in pixels
     BLINDS = 12 # how many bars
@@ -93,7 +97,7 @@ module Vfx
       reach = [x, w - x].max
       rise = [y, h - y].max
       radius = Math.sqrt((reach * reach) + (rise * rise)) * (1 - cover)
-      [ink.merge(x: x - radius, y: y - radius, w: radius * 2, h: radius * 2, path: "sprites/vfx/hole.png"),
+      [ink.merge(x: x - radius, y: y - radius, w: radius * 2, h: radius * 2, path: "#{SPRITES}/hole.png"),
        ink.merge(x: 0, y: 0, w: x - radius, h: h),
        ink.merge(x: x + radius, y: 0, w: w - x - radius, h: h),
        ink.merge(x: 0, y: 0, w: w, h: y - radius),

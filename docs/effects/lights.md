@@ -3,7 +3,7 @@
 ![Light map](../clips/lights.webp)
 
 - **File:** `mygame/lib/vfx/lights.rb` (`Vfx::Lights`)
-- **Needs:** `sprites/vfx/light.png`. Any licence tier, web builds included.
+- **Needs:** `sprites/light.png` beside the file. Any licence tier, web builds included.
 - **Cost:** one screen-sized render target and one sprite per light.
 
 ## What it is
@@ -35,7 +35,7 @@ end
 | Call | Does |
 |---|---|
 | `Vfx::Lights.draw(outputs, lights, ambient: [24, 26, 44], target: :vfx_lights, w: 1280, h: 720, extra: [])` | Builds the light map and returns the sprite that lays it over the scene |
-| `Vfx::Lights.sprites(lights, path: "sprites/vfx/light.png")` | The additive sprites alone, if you manage the render target yourself |
+| `Vfx::Lights.sprites(lights, path: "#{Vfx::Lights::SPRITES}/light.png")` | The additive sprites alone, if you manage the render target yourself |
 | `Vfx::Lights.flicker(clock, seed: 0, amount: 0.06)` | A number wandering around 1, for a torch's radius |
 
 A light is a Hash:

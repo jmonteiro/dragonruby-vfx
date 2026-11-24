@@ -24,13 +24,16 @@ that demonstrates it.
   file's header, its docs page and `CREDITS.md`. Never copy code from a source
   whose licence is not MIT, zlib, CC0 or similar, and never from Shadertoy,
   The Book of Shaders or lygia.
-- Sprites are drawn by code, in `bin/gen_sprites.rb`.
+- Sprites are drawn by code, in `bin/gen_sprites.rb`. An effect's pictures go
+  in `mygame/lib/vfx/sprites/` and are found through the file's own `SPRITES`
+  constant, never by a fixed path, so the folder works wherever it is copied.
 - No shaders in the library. DragonRuby's shaders are Pro-only, experimental,
   and behaved unreliably when tried; see `experimental/shaders/README.md`.
 
 ## Adding an effect
 
 1. `mygame/lib/vfx/<id>.rb` with a header comment: what it is, a usage block, the source.
+   Add it to `mygame/lib/vfx.rb`.
 2. `mygame/app/demos/<id>.rb` (a demo may show two small related effects): `ID`, `TITLE`, `BLURB`, `CONTROLS`, `SHOT_AT`,
    `setup`, `tick(args, demo, input)`. It must play by itself when
    `input[:auto]` is true. Add it to `Gallery::DEMOS` and the requires in `main.rb`.
@@ -46,7 +49,8 @@ from the engine's samples.
 ## Commands
 
 `bin/run`, `bin/test`, `bin/lint`, `bin/shots`, `bin/clips`,
-`bin/web` (browser build only), `bin/serve` and `bin/build` (every platform);
+`bin/web` (browser build only), `bin/serve`, `bin/pages` (publishes the
+gallery) and `bin/build` (every platform);
 see `README.md`.
 
 GitHub Actions runs the lint and the tests on every push. The tests there use

@@ -32,7 +32,7 @@ module Demos
       pieces = Vfx::Lightning.bolt(demo[:from], 660, x, y, seed: (demo[:strikes] * 100) + demo[:left].idiv(3))
       args.outputs.primitives << { x: 0, y: 0, w: 1280, h: 720, path: :solid, r: 190, g: 220, b: 255, a: 60 * power }
       args.outputs.primitives << Vfx::Lightning.sprites(pieces, alpha: 255 * power)
-      args.outputs.primitives << { x: x - 90, y: y - 90, w: 180, h: 180, path: "sprites/vfx/glow.png", blendmode: 2, a: 255 * power }
+      args.outputs.primitives << { x: x - 90, y: y - 90, w: 180, h: 180, path: "sprites/demo/glow.png", blendmode: 2, a: 255 * power }
     end
 
     def self.strike(demo, x, y)

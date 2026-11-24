@@ -65,7 +65,7 @@ module Demos
       list << Stage.blob({ x: TARGET_X + knock + tremble, y: lane[:y], w: 100, h: 100 }, struck ? Stage::WHITE : Stage::RED)
       list << Stage.circle(fist_x + tremble, lane[:y] + 50, 34, Stage::YELLOW)
       if struck
-        list << { x: contact_x - 60, y: lane[:y] - 30, w: 220, h: 160, path: "sprites/vfx/glow.png", blendmode: 2 }
+        list << { x: contact_x - 60, y: lane[:y] - 30, w: 220, h: 160, path: "sprites/demo/glow.png", blendmode: 2 }
       end
       list
     end

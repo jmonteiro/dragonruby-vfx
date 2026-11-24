@@ -4,6 +4,8 @@ Visual effects for the [DragonRuby Game Toolkit](https://dragonruby.org),
 ported from techniques that are standard in other engines. Each effect is one
 Ruby file with no dependencies: copy it into your game and require it.
 
+**[Try the gallery in your browser](https://jmonteiro.github.io/dragonruby-vfx/)**: every effect, playing, with nothing to install.
+
 Not affiliated with DragonRuby LLC. MIT licence; the sprites are CC0.
 
 ## Effects
@@ -34,7 +36,7 @@ Not affiliated with DragonRuby LLC. MIT licence; the sprites are CC0.
 | Shadow-casting light | `lib/vfx/shadows.rb` | Lights that walls block, and line of sight | [shadows](docs/effects/shadows.md) |
 
 All twenty-two work on every DragonRuby licence tier and in web builds. None
-uses a shader. Some draw a sprite from `mygame/sprites/vfx/`; each file's header
+uses a shader. Some draw a picture from the `sprites/` folder beside them; each file's header
 says which.
 
 ## Gallery
@@ -54,10 +56,23 @@ Each picture opens that effect's page, which shows it moving.
 
 ## Use an effect
 
-1. Copy the file from `mygame/lib/vfx/` into your game, e.g. `mygame/lib/vfx/shake.rb`,
-   and any sprite its header names into `mygame/sprites/vfx/`.
+1. Copy the file from `mygame/lib/vfx/` into your game, e.g. `mygame/lib/vfx/shake.rb`.
+   If its header names a picture, copy that into a `sprites/` folder beside it.
+   Or copy the whole `lib/vfx/` folder and take what you need.
 2. `require "lib/vfx/shake.rb"` in your `main.rb`.
 3. Follow the usage block at the top of the file.
+
+### With drenv
+
+[drenv](https://github.com/Nitemaeric/drenv) can vendor the whole library into
+your game and keep it pinned:
+
+    drenv add github:jmonteiro/dragonruby-vfx -n vfx
+
+That puts the effects and their pictures in `mygame/vendor/vfx/` and requires
+them all through `app/drenv_bundle.rb`.
+
+### How an effect is used
 
 Effects that keep state follow the same shape:
 
@@ -95,8 +110,9 @@ own copy of DragonRuby and copy this repository's files over it, so
     bin/clips weather        # film one effect
     bin/web                  # build the gallery for the browser into builds/
     bin/serve                # build for the browser and serve it at http://localhost:4000
+    bin/pages                # build for the browser and publish it to GitHub Pages
     bin/build                # package every platform into builds/
-    ruby bin/gen_sprites.rb  # redraw mygame/sprites/vfx/ and the icon
+    ruby bin/gen_sprites.rb  # redraw the library's and the gallery's sprites, and the icon
 
 ## Related work
 
@@ -126,8 +142,10 @@ from.
 
 ## Layout
 
-- `mygame/lib/vfx/`: the library. One effect per file, each standing alone.
-- `mygame/sprites/vfx/`: the white shapes some effects draw. `sprites/demo/` belongs to the gallery.
+- `mygame/lib/vfx/`: the library. One effect per file, each standing alone. `mygame/lib/vfx.rb` requires them all.
+- `drenv.toml`: makes the library installable with drenv.
+- `mygame/lib/vfx/sprites/`: the white shapes some effects draw. They find them beside themselves, wherever the folder is put.
+- `mygame/sprites/demo/`: pictures the gallery alone uses.
 - `mygame/app/`: the gallery. `demos/` has one short demo per effect.
 - `mygame/tests/all.rb`: tests of the effects' arithmetic.
 - `docs/effects/`: one page per effect; `llms.txt` is a plain-text index of them.

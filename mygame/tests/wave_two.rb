@@ -11,7 +11,7 @@ require "lib/vfx/warp.rb"
 require "lib/vfx/shadows.rb"
 
 def test_silhouette_mask_sits_where_the_sprite_is(args, assert)
-  mask = Vfx::Silhouette.mask(args.outputs, { x: 10, y: 20, w: 64, h: 48, path: "sprites/vfx/circle.png", angle: 30 }, target: :test_mask)
+  mask = Vfx::Silhouette.mask(args.outputs, { x: 10, y: 20, w: 64, h: 48, path: "lib/vfx/sprites/circle.png", angle: 30 }, target: :test_mask)
   assert.equal! mask, { x: 10, y: 20, w: 64, h: 48, path: :test_mask, angle: 30 }
 end
 

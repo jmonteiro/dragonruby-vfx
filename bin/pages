@@ -1,0 +1,24 @@
+#!/bin/sh
+# Builds the gallery for the browser and publishes it to GitHub Pages, at
+# https://jmonteiro.github.io/dragonruby-vfx/. The site is the `gh-pages`
+# branch, replaced whole each time by one commit, so the history stays small.
+#
+# Once, to switch Pages on for the repository:
+#   gh api -X POST repos/jmonteiro/dragonruby-vfx/pages -f 'source[branch]=gh-pages' -f 'source[path]=/'
+#
+# The build runs here, not in GitHub Actions, because it needs the whole
+# engine and only the engine's executable is available there.
+cd "$(dirname "$0")/.." || exit 1
+remote=$(git remote get-url origin) || exit 1
+built_from=$(git rev-parse --short HEAD)
+bin/web || exit 1
+site=$(ls -d builds/*-html5-*/ | head -1)
+touch "$site/.nojekyll" # serve the files as they are
+cd "$site" || exit 1
+rm -rf .git
+git init -q -b gh-pages
+git add -A
+git -c commit.gpgsign=false commit -q -m "The gallery, built from $built_from"
+git push -q -f "$remote" gh-pages || exit 1
+rm -rf .git
+echo "Published. It can take a minute to appear at https://jmonteiro.github.io/dragonruby-vfx/"

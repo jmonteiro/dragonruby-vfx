@@ -22,7 +22,7 @@ def tick(args)
   mouse = args.inputs.mouse
   if mouse.click
     Vfx::Decals.stamp(decals, { x: mouse.x - 20, y: mouse.y - 20, w: 40, h: 40,
-                                path: "sprites/vfx/circle.png", r: 239, g: 98, b: 108, a: 200 })
+                                path: "lib/vfx/sprites/circle.png", r: 239, g: 98, b: 108, a: 200 })
   end
   Vfx::Decals.clear(decals) if args.inputs.keyboard.key_down.space
 

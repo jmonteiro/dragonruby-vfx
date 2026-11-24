@@ -3,7 +3,7 @@
 ![Scene transitions](../clips/transition.webp)
 
 - **File:** `mygame/lib/vfx/transition.rb` (`Vfx::Transition`)
-- **Needs:** `sprites/vfx/hole.png` for the iris only. Any licence tier, web builds included.
+- **Needs:** `sprites/hole.png` beside the file, for the iris only. Any licence tier, web builds included.
 - **Cost:** 1 to 5 rectangles; `:tiles` draws up to 144.
 
 ## What it is

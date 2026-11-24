@@ -10,9 +10,12 @@ Conventions shared by every effect:
 - Helpers named `draw(outputs, ...)` fill a render target and return the one sprite that shows it; pass `args.outputs`.
 - Stateless effects (`Vfx::RgbSplit`, `Vfx::Pixelate`, `Vfx::Film`, `Vfx::Lights`, `Vfx::Silhouette`, `Vfx::Lightning`, `Vfx::Parallax`, `Vfx::Slices`, `Vfx::Warp`, `Vfx::Shadows`) have no `new` and no `tick`.
 - A triangle is a sprite Hash with `x, y, x2, y2, x3, y3` in place of `w, h`, and `source_x, source_y, source_x2, ...` for the part of the picture it shows.
+- Effects that draw a picture find it in a `sprites/` folder beside their own file (`Vfx::<Effect>::SPRITES`).
 - Blend modes on a sprite Hash: `blendmode: 1` normal, `2` additive, `8` multiply.
 - Sprites are Hashes with `x, y, w, h, path`; `x, y` is the bottom-left corner. `path: :solid` is a filled rectangle.
 - Code must run on mruby: no Regexp, and `Integer#/` may return a Float.
+
+To load every effect at once, `require "lib/vfx.rb"`.
 
 ## Effects
 

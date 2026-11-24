@@ -29,3 +29,6 @@ Twenty-two effects that need no shader:
 - Shadow-casting light and line of sight (`shadows.rb`)
 
 And the gallery that shows them all, which also builds for the browser.
+
+`lib/vfx.rb` requires every effect, and `drenv.toml` lets drenv install the
+library.

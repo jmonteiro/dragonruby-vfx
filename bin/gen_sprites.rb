@@ -33,14 +33,9 @@ def inside(distance, edge, soft)
   ((edge - distance) / soft).clamp(0.0, 1.0)
 end
 
-dir = "mygame/sprites/vfx"
+dir = "mygame/lib/vfx/sprites"
 
 png("#{dir}/circle.png", 128) { |u, v| [1, 1, 1, inside(radius(u, v), 0.97, 0.03)] }
-
-png("#{dir}/glow.png", 128) do |u, v|
-  falloff = (1 - radius(u, v)).clamp(0.0, 1.0)
-  [1, 1, 1, falloff * falloff]
-end
 
 png("#{dir}/ring.png", 256) do |u, v|
   d = radius(u, v)
@@ -78,6 +73,12 @@ end
 
 # --- pictures for the gallery's demos only ---------------------------------
 demo = "mygame/sprites/demo"
+
+# A soft round glow, for the flash where a blow or a bolt lands.
+png("#{demo}/glow.png", 128) do |u, v|
+  falloff = (1 - radius(u, v)).clamp(0.0, 1.0)
+  [1, 1, 1, falloff * falloff]
+end
 
 # A round creature with ears, in several colours, so that a silhouette of it
 # is plainly a shape and not a rectangle.

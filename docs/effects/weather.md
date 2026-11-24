@@ -3,7 +3,7 @@
 ![Rain and snow](../clips/weather.webp)
 
 - **File:** `mygame/lib/vfx/weather.rb` (`Vfx::Weather`)
-- **Needs:** `sprites/vfx/streak.png` and `ring.png` for rain, `circle.png` for snow. Any licence tier, web builds included.
+- **Needs:** beside the file, `sprites/streak.png` and `ring.png` for rain, `circle.png` for snow. Any licence tier, web builds included.
 - **Cost:** one sprite per drop (300 by default), each moved in Ruby every frame, plus one per splash on screen.
 
 ## What it is

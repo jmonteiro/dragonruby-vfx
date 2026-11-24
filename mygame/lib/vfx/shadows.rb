@@ -16,9 +16,12 @@
 #
 # Technique: the visibility polygon, as explained by Nicky Case's "Sight &
 # Light" and Red Blob Games' "2D Visibility". Written from scratch.
-# This file stands alone: copy it and require it. It draws sprites/vfx/light.png.
+# This file stands alone: copy it, and sprites/light.png beside it, and require it.
 module Vfx
   module Shadows
+    # The pictures sit in a `sprites` folder beside this file, wherever that is.
+    SPRITES = "#{__FILE__[0, __FILE__.rindex("/")]}/sprites".freeze
+
     # The points of the visibility polygon around (x, y), in order, as [x, y]
     # pairs. walls: [x1, y1, x2, y2] each. Nothing beyond `radius` is seen.
     def self.polygon(x, y, walls, radius)
@@ -77,7 +80,7 @@ module Vfx
       lit.h = side
       lit.background_color = [0, 0, 0, 0]
       lit.primitives << fan(polygon(light[:x], light[:y], walls, radius), radius, left, bottom)
-      lit.primitives << { x: 0, y: 0, w: side, h: side, path: "sprites/vfx/light.png", blendmode: inside,
+      lit.primitives << { x: 0, y: 0, w: side, h: side, path: "#{SPRITES}/light.png", blendmode: inside,
                           r: light[:r] || 255, g: light[:g] || 255, b: light[:b] || 255 }
       { x: left, y: bottom, w: side, h: side, path: target, blendmode: 2 }
     end

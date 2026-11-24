@@ -12,15 +12,18 @@
 #
 # Technique: layered particle fields, velocity-aligned streaks and ground
 # splashes, as in most 2D engines' rain tutorials. Written from scratch.
-# This file stands alone: copy it and require it. It draws sprites/vfx/streak.png,
-# ring.png and circle.png.
+# This file stands alone: copy it, and sprites/streak.png, ring.png and
+# circle.png beside it, and require it.
 module Vfx
   module Weather
+    # The pictures sit in a `sprites` folder beside this file, wherever that is.
+    SPRITES = "#{__FILE__[0, __FILE__.rindex("/")]}/sprites".freeze
+
     KINDS = {
       rain: { fall: 30.0, wind: -7.0, sway: 0.0, wide: 3, long: 70, alpha: 130, color: [190, 215, 255],
-              path: "sprites/vfx/streak.png" },
+              path: "#{SPRITES}/streak.png" },
       snow: { fall: 2.4, wind: -0.6, sway: 1.0, wide: 7, long: 7, alpha: 235, color: [255, 255, 255],
-              path: "sprites/vfx/circle.png" }
+              path: "#{SPRITES}/circle.png" }
     }.freeze
     SPLASH_FRAMES = 10
     FAR = 0.3 # the depth of the furthest drops; the nearest are 1
@@ -97,7 +100,7 @@ module Vfx
       spent = splash[:age] / SPLASH_FRAMES
       wide = (6 + (spent * 26)) * splash[:depth]
       { x: splash[:x], y: splash[:y], w: wide, h: wide * 0.35, anchor_x: 0.5, anchor_y: 0.5,
-        path: "sprites/vfx/ring.png", r: r, g: g, b: b, a: alpha * 1.4 * (1 - spent) * splash[:depth] }
+        path: "#{SPRITES}/ring.png", r: r, g: g, b: b, a: alpha * 1.4 * (1 - spent) * splash[:depth] }
     end
   end
 end

@@ -3,7 +3,7 @@
 ![Particles](../clips/particles.webp)
 
 - **File:** `mygame/lib/vfx/particles.rb` (`Vfx::Particles`)
-- **Needs:** `sprites/vfx/circle.png`, or your own sprite passed as `path:`. Any licence tier, web builds included.
+- **Needs:** `sprites/circle.png` beside the file, or your own sprite passed as `path:`. Any licence tier, web builds included.
 - **Cost:** one Hash per particle, updated in Ruby every frame. Hundreds are cheap; measure before going into the thousands. `max:` caps the count.
 
 ## What it is
@@ -54,7 +54,7 @@ end
 | `gravity` | 0 | Pulled down this much per frame; negative rises |
 | `drag` | 1.0 | Fraction of speed kept each frame |
 | `spin` | 0 | Degrees per frame. Number or Range |
-| `path` | `"sprites/vfx/circle.png"` | The sprite to draw |
+| `path` | the circle in `sprites/` | The sprite to draw |
 | `blendmode` | 1 | 1 normal; 2 additive, for anything that glows |
 
 ## Recipes

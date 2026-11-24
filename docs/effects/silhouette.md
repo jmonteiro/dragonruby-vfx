@@ -26,7 +26,7 @@ require "lib/vfx/silhouette.rb"
 def tick(args)
   args.state.hurt ||= 0.0
   args.state.hurt = 1.0 if args.inputs.keyboard.key_down.space
-  hero = { x: 560, y: 280, w: 160, h: 160, path: "sprites/vfx/circle.png", r: 72, g: 202, b: 180 }
+  hero = { x: 560, y: 280, w: 160, h: 160, path: "lib/vfx/sprites/circle.png", r: 72, g: 202, b: 180 }
 
   args.outputs.background_color = [40, 44, 70]
   mask = Vfx::Silhouette.mask(args.outputs, hero)

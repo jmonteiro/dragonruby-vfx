@@ -209,7 +209,7 @@ def test_transition_iris_closes_on_its_point(_args, assert)
   assert.true! hole[:w] / 2 > 900, "it starts beyond the furthest corner"
   9.times { Vfx::Transition.tick(transition) }
   shapes = Vfx::Transition.overlay(transition)
-  assert.true! shapes.none? { |shape| shape[:path] == "sprites/vfx/hole.png" }, "closed: no hole left"
+  assert.true! shapes.none? { |shape| shape[:path] == "lib/vfx/sprites/hole.png" }, "closed: no hole left"
   assert.true! shapes.sum { |shape| shape[:w] * shape[:h] } >= 1280 * 720
 end
 

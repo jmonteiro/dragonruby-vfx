@@ -13,9 +13,12 @@
 #
 # References: Godot's light2d demos (MIT) and DragonRuby's own lighting sample
 # for the render-target approach; written from scratch.
-# This file stands alone: copy it and require it. It draws sprites/vfx/light.png.
+# This file stands alone: copy it, and sprites/light.png beside it, and require it.
 module Vfx
   module Lights
+    # The pictures sit in a `sprites` folder beside this file, wherever that is.
+    SPRITES = "#{__FILE__[0, __FILE__.rindex("/")]}/sprites".freeze
+
     # Builds the light map in a render target and returns the sprite that lays
     # it over the scene. Draw it after the scene and before the HUD.
     # ambient: [r, g, b] where no light reaches; [0, 0, 0] is pitch black.
@@ -33,7 +36,7 @@ module Vfx
 
     # One additive sprite per light. A light is a Hash with x, y, radius and,
     # if wanted, r, g, b (its colour) and a (its strength, up to 255).
-    def self.sprites(lights, path: "sprites/vfx/light.png")
+    def self.sprites(lights, path: "#{SPRITES}/light.png")
       lights.map do |light|
         radius = light[:radius]
         { x: light[:x] - radius, y: light[:y] - radius, w: radius * 2, h: radius * 2, path: path, blendmode: 2,

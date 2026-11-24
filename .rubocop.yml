@@ -7,7 +7,7 @@ AllCops:
   SuggestExtensions: false
   TargetRubyVersion: 3.1
   Include:
-    - "mygame/lib/vfx/**/*.rb"
+    - "mygame/lib/**/*.rb"
     - "mygame/app/**/*.rb"
     - "mygame/tests/**/*.rb"
     - "bin/gen_sprites.rb"

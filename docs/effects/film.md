@@ -3,7 +3,7 @@
 ![Vignette and film grain](../clips/film.webp)
 
 - **File:** `mygame/lib/vfx/film.rb` (`Vfx::Film`)
-- **Needs:** `sprites/vfx/vignette.png` and `sprites/vfx/grain.png`. Any licence tier, web builds included.
+- **Needs:** `sprites/vignette.png` and `sprites/grain.png` beside the file. Any licence tier, web builds included.
 - **Cost:** one sprite for the vignette; about 24 for the grain at the default tile size.
 
 ## What it is
